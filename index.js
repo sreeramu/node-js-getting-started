@@ -17,7 +17,7 @@ express()
             console.log("Body: " + body);
           var obj = JSON.parse(body);
           var searchText = obj.queryResult.parameters.result;
-          var speech = '';
+          var speech = 'default hello';
           switch(searchText)
           {
             case 'hello':
