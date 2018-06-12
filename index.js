@@ -7,7 +7,7 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
-  .post('/', (req,res) {
+  .post('/', function(req,res) {
         var body = '';
         req.on('data', function (data) {
             body += data;
