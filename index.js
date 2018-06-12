@@ -28,6 +28,7 @@ express()
               break;
           }
           var response = "{\"speech\":\"" + speech + "\",\"displayText\":\""+speech+"\",\"source\":\"webhook\"}";
+          console.log("response: " + response);
           res.writeHead(200, {'Content-Type': 'application/json'});
           res.end(response);
         });
