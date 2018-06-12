@@ -27,10 +27,10 @@ express()
               speech = 'bye, good night';
               break;
           }
-          var response = "{\"speech\":\"" + speech + "\",\"displayText\":\""+speech+"\",\"source\":\"webhook\"}";
+          var response = "{\"payload\": {\"google\": {\"expectUserResponse\": true,\"richResponse\": {\"items\": [{\"simpleResponse\": {\"textToSpeech\": \"this is a simple response\"}}]}}}}";
           console.log("response: " + response);
           res.writeHead(200, {'Content-Type': 'application/json'});
-          res.end(JSON.stringify({ "speech": speech, "displayText": speech}));
+          res.end(response);
         });
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
