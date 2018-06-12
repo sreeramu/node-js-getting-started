@@ -27,7 +27,7 @@ express()
               speech = 'bye, good night';
               break;
           }
-          var response = "{'speech':'" + speech + "','displayText':'"+speech+"','source':'webhook'}";
+          var response = "{\"speech\":\"" + speech + "\",\"displayText\":\""+speech+"\",\"source\":\"webhook\"}";
           res.writeHead(200, {'Content-Type': 'application/json'});
           res.end(response);
         });
