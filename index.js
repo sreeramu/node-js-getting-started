@@ -16,7 +16,7 @@ express()
         req.on('end', function () {
             console.log("Body: " + body);
           var obj = JSON.parse(body);
-          var searchText = obj.result.parameters.text;
+          var searchText = obj.queryResult.parameters.any;
           var speech = '';
           switch(searchText)
           {
