@@ -15,8 +15,21 @@ express()
         });
         req.on('end', function () {
             console.log("Body: " + body);
-          res.writeHead(200, {'Content-Type': 'text/html'});
-        res.end('post received' + body);
+          var obj = JSON.parse(body);
+          var searchText = obj.result.parameters.text;
+          var speech = '';
+          switch(searchText)
+          {
+            case 'hello':
+              speech = 'Hi, nice to meet you';
+              break;
+            case 'bye':
+              speech = 'bye, good night';
+              break;
+          }
+          var response = "{'speech':'" + speech + "','displayText':'+speech+"','source':'webhook'}";
+          res.writeHead(200, {'Content-Type': 'application/json'});
+          res.end(response);
         });
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
