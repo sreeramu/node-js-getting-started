@@ -30,7 +30,7 @@ express()
           var response = "{\"speech\":\"" + speech + "\",\"displayText\":\""+speech+"\",\"source\":\"webhook\"}";
           console.log("response: " + response);
           res.writeHead(200, {'Content-Type': 'application/json'});
-          res.end(response);
+          res.end(JSON.stringify({ "speech": speech, "displayText": speech}));
         });
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
