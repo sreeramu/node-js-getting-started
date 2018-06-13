@@ -28,14 +28,14 @@ express()
               speech = 'bye, good night';
               break;
           }
-          requestify.get('http://www.convertmp3.io/fetch/?format=JSON&video=youtube.com/watch?v=3pDfR3XDgk8').then(function(response) {
+          requestify.get('https://youtubetransfer.com/getinfo/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Drc2ft794XNI').then(function(response) {
 	// Get the response body
-	        var vresponse = response.getBody();
-          var alink = JSON.parse(vresponse).link;
+	  var alink = 'https://youtubetransfer.com/download/?url=' + Buffer.from("https://www.youtube.com/watch?v=rc2ft794XNI").toString('base64')
+          //var alink = JSON.parse(vresponse).link;
 	  //alink = "http://cdl18.convert2mp3.net/download.php?id=youtube_3pDfR3XDgk8&key=MSjwWGGZFJ1Q&d=y";
           //var response = "{\"payload\": {\"google\": {\"expectUserResponse\": true,\"richResponse\": {\"items\": [{\"simpleResponse\": {\"textToSpeech\": \"this is a simple response\"}}]}}}}";
           //var response = "{\"payload\": {\"google\": {\"expectUserResponse\": true,\"richResponse\": {\"items\": [{\"simpleResponse\": {\"ssml\": \"<speak>Hello <audio src='"+alink+"'>your wave file</audio></speak>\",\"displayText\": \"This is a SSML sample. Make sure your sound is enabled to hear the demo\"}}]}}}}";
-	  var response = "{\"payload\": {\"google\": {\"richResponse\": {\"items\": [{\"simpleResponse\": {\"textToSpeech\": \"ok\", \"displayText\": \"simpleResponse displayText\"}}, {\"mediaResponse\": {\"mediaType\": \"AUDIO\",\"mediaObjects\": [{\"name\": \"mediaResponse name\",\"description\": \"mediaResponse description\",\"contentUrl\": \"http://cdl18.convert2mp3.net/download.php?id=youtube_3pDfR3XDgk8&key=MSjwWGGZFJ1Q&d=y\"}]}} ], \"suggestions\": [{\"title\": \"This\"}, {\"title\": \"That\"} ] } } }, \"source\": \"webhook-play-sample\"}";
+	  var response = "{\"payload\": {\"google\": {\"richResponse\": {\"items\": [{\"simpleResponse\": {\"textToSpeech\": \"ok\", \"displayText\": \"simpleResponse displayText\"}}, {\"mediaResponse\": {\"mediaType\": \"AUDIO\",\"mediaObjects\": [{\"name\": \"mediaResponse name\",\"description\": \"mediaResponse description\",\"contentUrl\": \""+alink+"\"}]}} ], \"suggestions\": [{\"title\": \"This\"}, {\"title\": \"That\"} ] } } }, \"source\": \"webhook-play-sample\"}";
           console.log("response: " + response);
           res.writeHead(200, {'Content-Type': 'application/json'});
           res.end(response);
