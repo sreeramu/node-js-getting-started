@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const requestify = require('requestify')
 const PORT = process.env.PORT || 5000
 
 express()
@@ -27,11 +28,16 @@ express()
               speech = 'bye, good night';
               break;
           }
+          requestify.get('http://www.convertmp3.io/fetch/?format=JSON&video=youtube.com/watch?v=3pDfR3XDgk8').then(function(response) {
+	// Get the response body
+	        var vresponse = response.getBody();
+          var alink = JSON.parse(vresponse).link;
           //var response = "{\"payload\": {\"google\": {\"expectUserResponse\": true,\"richResponse\": {\"items\": [{\"simpleResponse\": {\"textToSpeech\": \"this is a simple response\"}}]}}}}";
-          var response = "{\"payload\": {\"google\": {\"expectUserResponse\": true,\"richResponse\": {\"items\": [{\"simpleResponse\": {\"ssml\": \"<speak>Hello <audio src='https://r1---sn-h5576n7k.googlevideo.com/videoplayback?lmt=1528702884740653&itag=18&requiressl=yes&ip=125.17.165.43&source=youtube&dur=40.077&fvip=1&id=o-ALqm4UNFeH0sWcEKzMGKRfcLrvRNEBQu__iJBc-z17aR&mime=video%2Fmp4&expire=1528898363&initcwndbps=890000&ratebypass=yes&ipbits=0&gcr=in&c=MWEB&gir=yes&mn=sn-h5576n7k%2Csn-h557snsl&mm=31%2C29&key=yt6&signature=D4F8D0C9DC94A4AE62E0F0F2AF7003EE482A2A3D.ACE11ACE3E5F5327FAB0E9BA6889C06A6B925484&clen=3687215&pl=24&mv=m&mt=1528876640&ms=au%2Crdu&sparams=clen%2Cdur%2Cei%2Cgcr%2Cgir%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpl%2Cratebypass%2Crequiressl%2Csource%2Cexpire&ei=284gW8y0H4mMz7sP_uaIwAk&cpn=zgFp_jKSs3YqD6SM&cver=2.20180612&ptk=youtube_single&oid=JEQqk2qq_a3keyyPTt1JJQ&ptchn=vrhwpnp2DHYQ1CbXby9ypQ&pltype=content'>your wave file</audio></speak>\",\"displayText\": \"This is a SSML sample. Make sure your sound is enabled to hear the demo\"}}]}}}}";
+          var response = "{\"payload\": {\"google\": {\"expectUserResponse\": true,\"richResponse\": {\"items\": [{\"simpleResponse\": {\"ssml\": \"<speak>Hello <audio src='"+alink+"'>your wave file</audio></speak>\",\"displayText\": \"This is a SSML sample. Make sure your sound is enabled to hear the demo\"}}]}}}}";
           console.log("response: " + response);
           res.writeHead(200, {'Content-Type': 'application/json'});
           res.end(response);
+});
         });
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
